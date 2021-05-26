@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-05-26T09:55:31+02:00",
+  "id": "Alexandrebzk.github.io",
+  "duration": 15,
+  "title": "TUTORIEL APPLICATION NATIVE JAVA",
+  "summary": "Tutoriel application native JAVA",
+  "source": "tutorial.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "codelab",
+    "markdown"
+  ],
+  "tags": [
+    "web"
+  ],
+  "url": "Alexandrebzk.github.io"
+}

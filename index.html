@@ -43,7 +43,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Création du projet" duration="0">
+      <google-codelab-step label="Création du projet" duration="20">
         <p>Dans cette étape, vous allez créer un nouveau projet Android pour votre première application. Cette application simple affiche la chaîne &#34;Hello World&#34; sur l&#39;écran d&#39;un appareil virtuel ou physique Android. Pour éviter des potentiels problèmes, nous utiliserons dans ce tutoriel l&#39;appareil émulé par Android Studio.</p>
 <p>Voici à quoi ressemblera l&#39;application terminée:</p>
 <p class="image-container"><img style="width: 250.00px" src="img/daf9b90a91ec4066.png"></p>
@@ -69,6 +69,32 @@
 <li>Construit votre projet (cela peut prendre quelques instants). Android Studio utilise <a href="https://gradle.org/" target="_blank">Gradle </a>comme système de construction. Vous pouvez suivre la progression de la construction en bas de la fenêtre Android Studio.</li>
 <li>Ouvre l&#39;éditeur de code affichant votre projet.</li>
 </ul>
+<h2 is-upgraded><strong>Étape 2: Créer un périphérique virtuel (émulateur)</strong></h2>
+<p>Dans cette tâche, vous allez utiliser le <a href="http://developer.android.com/tools/devices/managing-avds.html" target="_blank">gestionnaire d&#39;appareils virtuels Android (AVD) </a>pour créer un appareil virtuel (ou émulateur) qui simule la configuration d&#39;un type particulier d&#39;appareil Android.</p>
+<p>La première étape consiste à créer une configuration qui décrit le périphérique virtuel.</p>
+<ol type="1">
+<li>Dans Android Studio, sélectionnez <strong>Outils</strong> &gt; <strong>Gestionnaire AVD</strong>, ou cliquez sur l&#39;icône Gestionnaire AVD dans la barre d&#39;outils.</li>
+<li>Cliquez sur <strong>+Créer un périphérique virtuel</strong>. (Si vous avez déjà créé un périphérique virtuel, la fenêtre affiche tous vos appareils existants et le bouton <strong>+Créer un périphérique virtuel</strong> se trouve en bas.). La fenêtre <strong>Sélectionner du matériel</strong> affiche une liste de définitions de périphériques matériels préconfigurées.</li>
+<li>Choisissez une définition d&#39;appareil, telle que <strong>Pixel 3a</strong>, puis cliquez sur <strong>Suivant</strong>. (Pour ce tutoriel, peu importe la définition de périphérique que vous choisissez).</li>
+<li>Dans la boîte de dialogue <strong>Image système</strong>, dans l&#39;onglet <strong>Recommandé</strong>, choisissez la dernière version. (Cela importe.)</li>
+<li>Si un lien <strong>de téléchargement</strong> est visible à côté d&#39;une dernière version, il n&#39;est pas encore installé et vous devez d&#39;abord le télécharger. Si nécessaire, cliquez sur le lien pour démarrer le téléchargement, puis cliquez sur <strong>Suivant</strong> lorsque c&#39;est terminé. Cela peut prendre un certain temps en fonction de la vitesse de votre connexion.</li>
+</ol>
+<aside class="special"><p><strong>Remarque :</strong> Les images système peuvent prendre une grande quantité d&#39;espace disque, ne téléchargez que ce dont vous avez besoin.</p>
+</aside>
+<h2 is-upgraded><strong>Étape 3 : Exécutez votre application sur votre nouvel émulateur</strong></h2>
+<ol type="1">
+<li>Dans Android Studio, sélectionnez <strong>Exécuter &gt; Exécuter « application »</strong> (^R sur mac) ou cliquez sur l&#39;icône <strong>Exécuter</strong> dans la barre d&#39;outils <img style="width: 30.00px" src="img/11d7412697cbd908.png">. L&#39;icône changera lorsque votre application sera déjà en cours d&#39;exécution <img style="width: 30.00px" src="img/5a682ac015c68de8.png">.</li>
+</ol>
+<p>Si vous obtenez une boîte de dialogue indiquant &#34;L&#39;exécution instantanée nécessite que la plate-forme correspondant à votre appareil cible (Android N...) soit installée&#34;, allez-y et cliquez sur <strong>Installer et continuez.</strong></p>
+<ol type="1">
+<li>Dans <strong>Exécuter &gt; Sélectionner un appareil</strong>, sous <strong>Appareils disponibles</strong>, sélectionnez le périphérique virtuel que vous venez de configurer. Ce menu apparaît également dans la barre d&#39;outils.</li>
+</ol>
+<p class="image-container"><img style="width: 250.00px" src="img/ae02611248db1edc.png"></p>
+<p>L&#39;émulateur démarre et démarre comme un appareil physique. Selon la vitesse de votre ordinateur, cela peut prendre un certain temps. Vous pouvez regarder dans la petite barre d&#39;état horizontale tout en bas d&#39;Android Studio les messages pour voir la progression.</p>
+<p class="image-container"><img style="width: 250.00px" src="img/85293744fdf6341d.png"></p>
+<p>Une fois que votre application est construite et que l&#39;émulateur est prêt, Android Studio télécharge l&#39;application sur l&#39;émulateur et l&#39;exécute. Vous devriez voir votre application comme indiqué dans la capture d&#39;écran suivante.</p>
+<aside class="special"><p><strong>Remarque</strong> : C&#39;est une bonne pratique de démarrer l&#39;émulateur au début de votre session. Ne fermez pas l&#39;émulateur avant d&#39;avoir terminé de tester votre application, de sorte que vous n&#39;ayez pas à attendre que l&#39;émulateur redémarre. En clair, n&#39;ayez pas plus d&#39;un émulateur en cours d&#39;exécution à la fois, pour réduire l&#39;utilisation de la mémoire.</p>
+</aside>
 
 
       </google-codelab-step>

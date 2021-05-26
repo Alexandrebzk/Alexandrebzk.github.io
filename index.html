@@ -46,7 +46,7 @@
       <google-codelab-step label="Création du projet" duration="20">
         <p>Dans cette étape, vous allez créer un nouveau projet Android pour votre première application. Cette application simple affiche la chaîne &#34;Hello World&#34; sur l&#39;écran d&#39;un appareil virtuel ou physique Android. Pour éviter des potentiels problèmes, nous utiliserons dans ce tutoriel l&#39;appareil émulé par Android Studio.</p>
 <p>Voici à quoi ressemblera l&#39;application terminée:</p>
-<p class="image-container"><img style="width: 250.00px" src="img/daf9b90a91ec4066.png"></p>
+<p class="image-container"><img style="width: 250.00px" src="img/a2f3877254bac6fe.gif"></p>
 <h2 is-upgraded><strong>Ce que vous apprendrez</strong></h2>
 <ul>
 <li>Comment créer un projet dans Android Studio.</li>
@@ -132,10 +132,25 @@
 <h2 is-upgraded><strong>Étape 3: Ajout/modification des propriétés</strong></h2>
 <p>On peut voir ci-dessus le champ <code>android:text=&#34;Next&#34;</code> mais ce &#34;Next&#34; est grisé. En fait, c&#39;est Android Studio qui vous montre la valeur de la propriété mais quand on clique dessus on découvre que c&#39;est une adresse vers un autre champ: <code>android:text=&#34;@string/next&#34;</code>. En faisant un Ctrl + clic (cmd + clic sur mac), on peut accéder à cette adresse et y trouve toutes les variables utilisables en tant que champ &#34;texte&#34;.</p>
 <p class="image-container"><img style="width: 600.00px" src="img/ff2d56fb9258a455.png"></p>
-<p>Pour changer la valeur du boutton il nous suffit donc de changer ce champ : <code>&lt;string name=&#34;next&#34;&gt;Nouveau Next&lt;/string&gt;</code>. On peut également accéder à ce champ d&#39;une deuxieme manière (elle est plus élégante). En passant par le panel des attributs</p>
+<p>Pour changer la valeur du boutton il nous suffit donc de changer ce champ : <code>&lt;string name=&#34;next&#34;&gt;Nouveau Next&lt;/string&gt;</code>. On peut également accéder à ce champ d&#39;une deuxieme manière (elle est plus élégante). En passant par le panel des attributs:</p>
+<p class="image-container"><img style="width: 600.00px" src="img/764362521bb4b578.png"></p>
+<aside class="warning"><p><strong>Dépannage</strong>: Si rien ne s&#39;affiche dans le panel d&#39;attributs, faites bien attention à sélectionner le composant qui vous interesse (ici, le bouton NEXT).</p>
+</aside>
+<aside class="special"><p><strong>Astuce</strong>: Pour trouver facilement une propriété, vous pouvez la chercher en tapant son nom dans la petite loupe en haut du panel.</p>
+</aside>
 <p>Il existe plusieurs fichiers de ce type qui servent à définir d&#39;autres propriétés, ils sont tous dans le dossier <strong>res &gt; values</strong> :</p>
 <p class="image-container"><img style="width: 250.00px" src="img/365242299f3a5518.png"></p>
 <p>Ces fichiers servent à renseigner comme vous l&#39;aurez compris des dimensions, des couleurs ou des champs texte.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ajout des vues et des contraintes" duration="30">
+        <h2 is-upgraded><strong>Ce que vous apprendrez</strong></h2>
+<ul>
+<li>Comment ajouter de nouvelles vues à votre mise en page.</li>
+<li>Comment contraindre la position d&#39;une vue à une autre vue.</li>
+</ul>
 
 
       </google-codelab-step>

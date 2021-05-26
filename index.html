@@ -151,13 +151,12 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Ajout des vues et des contraintes" duration="30">
+      <google-codelab-step label="Ajout des composants" duration="30">
         <p>Voici l&#39;objectif de cette partie :</p>
 <p class="image-container"><img style="width: 250.00px" src="img/daf9b90a91ec4066.png"></p>
 <h2 is-upgraded><strong>Ce que vous apprendrez</strong></h2>
 <ul>
 <li>Comment ajouter de nouvelles vues à votre mise en page.</li>
-<li>Comment contraindre la position d&#39;une vue à une autre vue.</li>
 </ul>
 <h2 is-upgraded><strong>Ajouter de nouvelles vues à notre page</strong></h2>
 <p>Nous allons dans cette partie mettre en place les champs nécessaires à la connexion utilisateur. Énumérons tout d&#39;abord les champs que nous allons devoir ajouter:</p>
@@ -181,13 +180,56 @@
 </aside>
 <p>Ça ne marche pas vraiment si la réponse est écrite juste en dessous... Mais j&#39;ose espérer que vous avez essayé de répondre sans regarder :smile:. On doit donc modifier le fichier <code>fragment_first.xml</code> et y ajouter les champs que l&#39;on a identifié !</p>
 <p>Maintenant c&#39;est à vous de jouer ! Je vous laisse trifouiller cette merveilleuse palette de composants pour coller au maximum à l&#39;objectif !</p>
-<aside class="special"><p><strong>Aide</strong>: Si vous n&#39;arrivez pas à trouver les types de composant à utiliser, voici les réponses :  </p>
+<aside class="special"><p><strong>Aide</strong>: Si vous n&#39;arrivez pas à trouver les types de composant à utiliser, voici les réponses :   - Username -&gt; Text &gt; Email   - Mot de passe -&gt; Text &gt; Password   - Logo -&gt; Widgets &gt; ImageView   - Liens -&gt; Text &gt; TextView </p>
+</aside>
+<p>Si vous avez l&#39;âme d&#39;un graphiste en vous, ce que vous venez de créer ressemble à peu près à l&#39;original !</p>
+<p>Vous avez peut être également remarqué la présence de ronds sur les 4 coins d&#39;un composant lorsque vous le sélectionnez. Par convention, un composant ne peut pas être &#34;flottant&#34;, il faut toujours qu&#39;il soit relié à quelque chose.</p>
+<p class="image-container"><img style="width: 250.00px" src="img/72ef5a287e08a415.png"></p>
+<p>Ici, on décide de centrer tous les composants, donc on les relie à gauche et à droite aux bords du fragment. Concernant le rond du haut, j&#39;ai pour habitude de relier à son composant du dessus et pour le bas, la limite du bas du fragment.</p>
+<aside class="warning"><p><strong>Roue de secours</strong>: Si vous n&#39;avez pas réussi cette partie, placez vous sur le tag &#34;<strong>HomePage</strong>&#34;. <code>git checkout tags/HomePage</code></p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Récupération des inputs" duration="20">
+        <h2 is-upgraded><strong>Ce que vous apprendrez</strong></h2>
 <ul>
-<li>Username -&gt; Text &gt; Email</li>
-<li>Mot de passe -&gt; Text &gt; Password</li>
-<li>Logo -&gt; Widgets &gt; ImageView</li>
-<li>Liens -&gt; Text &gt; TextView </li>
+<li>Identifier de manière claire un composant dans une vue</li>
+<li>Récupérer et extraire sa valeur</li>
 </ul>
+<h2 is-upgraded><strong>Identification claire d&#39;un composant</strong></h2>
+<p>Il est primordial de garder une cohérence de nommage pour les composants, ou de manière générale d&#39;ailleurs. Deux conventions sont très répandues:</p>
+<ul>
+<li>le snake case : <code>composant_id</code></li>
+<li>le camel case : <code>composantId</code></li>
+</ul>
+<p>Vous pouvez choisir celle que vous voulez (mais je vous conseille quand même le camel case car on écrit plus vite), le plus important et d&#39;appliquer la même convention partout. J&#39;ai choisi pour ma part le camel case.</p>
+<h2 is-upgraded><strong>Récupérer et extraire les données des composants</strong></h2>
+<p>Chaque composant d&#39;une vue est caractérisé par un identifiant unique. Ces identifiants sont ensuite chargés dans un contexte accessible depuis la partie JAVA qui est représenté par la variable globale R. Cette variable, qui ne nécessite pas d&#39;import, est la librairie qui contient tous les identifiants, tous les layouts, plus généralement toutes les Ressources de l&#39;application.</p>
+<p>Pour accéder à un certain composant, on va donc procéder de la sorte :</p>
+<pre><code language="language-java" class="language-java">final EditText usernameEditText = view.findViewById(R.id.idUsername);
+</code></pre>
+<aside class="warning"><p><strong>​Remarque</strong>: Ici on vient assigner à notre variable usernameEditText le composant qui représente le username et non pas seulement sa valeur !</p>
+</aside>
+<p>Avant de se ruer sur le code, tentons tout d&#39;abord d&#39;expliquer comment un fragment se comporte avec son contenu.</p>
+<p class="image-container"><img style="width: 600.00px" src="img/da4f0c74977888ce.png"></p>
+<p>À la manière du JavaScript, le fragment va placer des &#34;Listener&#34; sur un ou plusieurs de ses composants pour effectuer des actions suivant certaines conditions. Ici on peut constater que le bouton SignIn, retrouvé par son identifiant, va se voir attribuer un Listener qui se déclenchera dès que celui-ci fera l&#39;objet d&#39;un clic. Comme vous pouvez le voir, on peut ajouter autant de listener qu&#39;on peut effectuer d&#39;actions avec le composant, il suffit d&#39;override les méthodes possibles.</p>
+<p>Maintenant qu&#39;on voit à peu près comment ça marche, on peut récupérer les champs username et password et les afficher dans notre console pour vérifier que cela fonctionne comme prévu:</p>
+<pre><code language="language-java" class="language-java">        final EditText usernameEditText = view.findViewById(R.id.idUsername);
+        final EditText passwordEditText = view.findViewById(R.id.idPassword);
+        final Button loginButton = view.findViewById(R.id.idSignIn);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i(&#34;FRAGMENT 1, username :&#34;,usernameEditText.getText().toString());
+                Log.i(&#34;FRAGMENT 1, password :&#34;,passwordEditText.getText().toString());
+                // NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_SecondFragment);
+            }
+        });
+</code></pre>
+<aside class="special"><p><strong>Remarque</strong>: L&#39;usage du Logger est à consommer sans modération !   Il est très puissant et est accessible très facilement depuis la partie &#34;run&#34; de Android studio:   <img src="img/99e54c7d72a476a7.png">  </p>
 </aside>
 
 

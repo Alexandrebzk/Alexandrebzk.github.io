@@ -99,6 +99,47 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="Exploration de l&#39;IDE" duration="15">
+        <p>En règle générale, chaque écran de votre application Android est associé à un ou plusieurs fragments. L&#39;écran unique affichant &#34;Hello first fragment&#34; est créé par un fragment, appelé FirstFragment.</p>
+<p>Cela a été généré pour vous lorsque vous avez créé votre nouveau projet. Chaque fragment visible dans une application Android a une disposition qui définit l&#39;interface utilisateur du fragment. Android Studio dispose d&#39;un éditeur de mise en page dans lequel vous pouvez créer et définir des mises en page.</p>
+<p>Les mises en page sont définies en <a href="https://en.wikipedia.org/wiki/XML" target="_blank">XML</a>. L&#39;éditeur de mise en page vous permet de définir et de modifier votre mise en page soit en codant en XML, soit en utilisant l&#39;éditeur visuel interactif.</p>
+<p>Chaque élément d&#39;une mise en page est une vue. Dans cette section, vous explorerez certains des panneaux de l&#39;éditeur de mise en page et vous apprendrez à modifier la propriété des vues.</p>
+<h2 is-upgraded><strong>Ce que vous apprendrez</strong></h2>
+<ul>
+<li>Comment utiliser l&#39;éditeur de mise en page.</li>
+<li>Comment définir les valeurs des propriétés.</li>
+<li>Comment ajouter/modifier des ressources.</li>
+</ul>
+<h2 is-upgraded><strong>Étape 1 : Ouvrez l&#39;éditeur de mise en page</strong></h2>
+<ol type="1">
+<li>Trouvez et ouvrez le dossier de <strong>mise en page</strong> (<strong>app &gt; res &gt; layout</strong>) sur le côté gauche dans le panneau <strong>Projet</strong>.</li>
+</ol>
+<aside class="warning"><p><strong>Dépannage :</strong> Si vous ne voyez pas le fichier <code>fragment_first.xml</code>, vérifiez que vous utilisez Android Studio 3.6 (ou supérieur, mais si vous avez suivi la partie installation ça devrait être bon).</p>
+</aside>
+<p>Les panneaux à droite de la vue Projet comprennent l&#39;éditeur de <em>mise en page</em>. Ils peuvent être disposés différemment dans votre version d&#39;Android Studio, mais la fonction est la même.</p>
+<p class="image-container"><img style="width: 600.00px" src="img/17b99ea3655bd789.png"></p>
+<p>Sur la gauche se trouve une <strong>palette (1)</strong> de vues que vous pouvez ajouter à votre application.</p>
+<p>Juste en dessous se trouve une <strong>arborescence de composants (2)</strong> montrant les vues actuellement dans ce fichier et la façon dont elles sont organisées les unes par rapport aux autres.</p>
+<p>Au centre se trouve <strong>l&#39;éditeur de conception (3)</strong>, qui affiche une représentation visuelle de ce à quoi ressemblera le contenu du fichier lorsqu&#39;il sera compilé. Vous pouvez afficher la représentation visuelle, le code XML, ou les deux.</p>
+<p>Enfin, sur la droite se trouve la <strong>palette d&#39;attributs (4)</strong>. Cette partie recense toutes les propriétés de l&#39;élément que vous sélectionnez dans l&#39;éditeur de conception.</p>
+<h2 is-upgraded><strong>Étape 2: Définition des propriétés</strong></h2>
+<p>Vous l&#39;aurez surement déjà remarqué si vous êtes un peu curieux mais on peut voir ce qu&#39;il se passe derrière cet éditeur de conception. Comme dit plus haut, c&#39;est codé en XML. Vous disposez de 3 boutons très utiles que voici :</p>
+<p class="image-container"><img style="width: 250.00px" src="img/fe473d91047dfacb.png"></p>
+<p>La vue qui est déjà sélectionnée (<strong>Design</strong>) est celle que je vous ai présenté dans la partie précédente. La vue <strong>Code</strong> vous permet d&#39;accéder au code XML et la vue <strong>Split</strong> vous montre les deux.</p>
+<p>On va se concentrer sur la vue Code pour expliquer la définition des propriétés:</p>
+<p class="image-container"><img style="width: 600.00px" src="img/29e274fd980fbd00.png"></p>
+<p>Ici on retrouve l&#39;arborescence des composants (ConstraintLayout &gt; (TextView + Button)). Ce qui nous interresse surtout dans cette partie c&#39;est comment modifier par exemple ce que contient le bouton &#34;Next&#34; de la page d&#39;accueil.</p>
+<h2 is-upgraded><strong>Étape 3: Ajout/modification des propriétés</strong></h2>
+<p>On peut voir ci-dessus le champ <code>android:text=&#34;Next&#34;</code> mais ce &#34;Next&#34; est grisé. En fait, c&#39;est Android Studio qui vous montre la valeur de la propriété mais quand on clique dessus on découvre que c&#39;est une adresse vers un autre champ: <code>android:text=&#34;@string/next&#34;</code>. En faisant un Ctrl + clic (cmd + clic sur mac), on peut accéder à cette adresse et y trouve toutes les variables utilisables en tant que champ &#34;texte&#34;.</p>
+<p class="image-container"><img style="width: 600.00px" src="img/ff2d56fb9258a455.png"></p>
+<p>Pour changer la valeur du boutton il nous suffit donc de changer ce champ : <code>&lt;string name=&#34;next&#34;&gt;Nouveau Next&lt;/string&gt;</code>. On peut également accéder à ce champ d&#39;une deuxieme manière (elle est plus élégante). En passant par le panel des attributs</p>
+<p>Il existe plusieurs fichiers de ce type qui servent à définir d&#39;autres propriétés, ils sont tous dans le dossier <strong>res &gt; values</strong> :</p>
+<p class="image-container"><img style="width: 250.00px" src="img/365242299f3a5518.png"></p>
+<p>Ces fichiers servent à renseigner comme vous l&#39;aurez compris des dimensions, des couleurs ou des champs texte.</p>
+
+
+      </google-codelab-step>
+    
   </google-codelab>
 
   <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>

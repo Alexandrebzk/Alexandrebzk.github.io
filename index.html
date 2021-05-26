@@ -30,7 +30,7 @@
       <google-codelab-step label="Introduction" duration="5">
         <p>Bienvenue dans ce petit tutoriel sur les applications natives JAVA. J&#39;ai essayé d&#39;être le plus exhaustif possible. Vous allez créer aujourd&#39;hui une superbe application android qui représente un système de connexion. Nous aborderons différents points tout au long de cette merveilleuse expérience. Pour vous donner un peu envie d&#39;aller jusqu&#39;au bout, voici à quoi ressemblera l&#39;application terminée:</p>
 <p class="image-container"><img style="width: 250.00px" src="img/a2f3877254bac6fe.gif"></p>
-<p>Par soucis de bienveillance de ma part, vous avez accès à un repository que voici : <a href="https://github.com/Alexandrebzk/Tutoriel-JAVA" target="_blank">Tutoriel JAVA</a>. Il vous sera proposé, tout au long du tutoriel, de repartir d&#39;une base pour démarrer l&#39;étape suivante. Ces étapes seront identifiées par des TAGS.</p>
+<p>Par soucis de bienveillance de ma part, vous avez accès à un repository que voici : <a href="https://github.com/Alexandrebzk/Tutoriel-JAVA" target="_blank">Tutoriel JAVA</a>. Il vous sera propos tout au long du tutoriel, au cas ou, de repartir d&#39;une base pour démarrer l&#39;étape suivante. Ces étapes seront identifiées par des TAGS.</p>
 
 
       </google-codelab-step>
@@ -192,7 +192,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Récupération des inputs" duration="20">
+      <google-codelab-step label="Récupération des inputs" duration="10">
         <h2 is-upgraded><strong>Ce que vous apprendrez</strong></h2>
 <ul>
 <li>Identifier de manière claire un composant dans une vue</li>
@@ -230,6 +230,121 @@
         });
 </code></pre>
 <aside class="special"><p><strong>Remarque</strong>: L&#39;usage du Logger est à consommer sans modération !   Il est très puissant et est accessible très facilement depuis la partie &#34;run&#34; de Android studio:   <img src="img/99e54c7d72a476a7.png">  </p>
+</aside>
+<aside class="warning"><p><strong>Roue de secours</strong>: Si vous n&#39;avez pas réussi cette partie, placez vous sur le tag &#34;<strong>RetrieveInputs</strong>&#34;. <code>git checkout tags/RetrieveInputs</code></p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Discussion avec une API" duration="30">
+        <h2 is-upgraded><strong>Ce que vous apprendrez dans cette partie</strong></h2>
+<ul>
+<li>Introduction à Retrofit2</li>
+<li>Contacter et traiter une réponse API</li>
+</ul>
+<p>Dans cette partie on va voir comment contacter une API depuis une application android. Il existe diverses solutions mais pour vous éviter de trop longues recherches, et surtout parce que c&#39;est mon travail de vous fournir les outils, nous allons utiliser Retrofit2.</p>
+<h2 is-upgraded><strong>Introduction à Retrofit2</strong></h2>
+<p>Retrofit2 est un package qui rassemble toutes les méthodes pour pouvoir contacter une API. Il nécessite cependant de créer une sorte d&#39;entité JAVA pour stocker la réponse de l&#39;API.</p>
+<p>On va donc commencer par créer cette entité :</p>
+<pre><code language="language-java" class="language-java">public class SessionToken {
+
+    private String token;
+    private LocalDateTime expirationDate;
+  //...
+}
+</code></pre>
+<p>Voici ce que l&#39;API nous répond:</p>
+<ul>
+<li>Un token, qui nous servira par la suite de passe-droit lors d&#39;appels API sécurisés</li>
+<li>Une date d&#39;expiration, car s&#39;il n&#39;y en avait pas... Ce serait la débandade !</li>
+</ul>
+<p>Maintenant que nous avons la réponse API sous forme d&#39;entité, nous allons maintenant définir l&#39;appel que nous voulons faire :</p>
+<pre><code language="language-java" class="language-java">public interface AuthAPI {
+
+    @GET(&#34;ping&#34;)
+    Call&lt;String&gt; ping();
+
+    @POST(&#34;v1/authentication/login&#34;)
+    @Headers(&#34;Content-type: application/json&#34;)
+    Call&lt;SessionToken&gt; loginUser(@Body JsonObject authInput);
+	
+  	//...
+}
+</code></pre>
+<p>On définit dans cette classe les méthodes que l&#39;on va potentiellement utiliser:</p>
+<ul>
+<li>ping(): je pense que le nom parle de lui même, cependant, le protocole de communication est précisé avec une directive @GET qui pointera sur l&#39;url &#34;ping&#34;.</li>
+<li>loginUser:  <ul>
+<li>On précise tout d&#39;abord que l&#39;on utilise le protocole POST sur la route <code>&#34;v1/authentication/login&#34;</code></li>
+<li>On averti l&#39;API que nous discutons en format JSON en ajoutant <code>&#34;Content-type: application/json&#34;</code> aux HEADERS de la future requête</li>
+<li>On précise que ce que l&#39;on envoi est un objet JSON</li>
+<li>On récupèrera un objet Call de SessionToken. Cet Objet nous permettra par la suite de traiter la requête de plusieurs manières. Vous comprendrez par la suite promis.</li>
+</ul>
+</li>
+</ul>
+<p>Si vous avez bien fait vos devoirs en cours, vous devriez avoir cette arborescence:</p>
+<p class="image-container"><img style="width: 250.00px" src="img/d945f8b051f68a43.png"></p>
+<p>On sait ce que l&#39;on manipule et comment on va discuter avec l&#39;API, je pense qu&#39;on est prêt à passer quelques appels.</p>
+<h2 is-upgraded><strong>Contacter et traiter une réponse API</strong></h2>
+<p>Avant de commencer à coder l&#39;appel API, il faut préciser dans le manifeste de notre application qu&#39;elle peut converser avec l&#39;extérieur:</p>
+<pre><code language="language-xml" class="language-xml">&lt;manifest xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    package=&#34;com.example.mapremireapplicationavecalexandrequivatresuperbe&#34;&gt;
+
+	&lt;!-- ... --&gt;
+  &lt;uses-permission android:name=&#34;android.permission.INTERNET&#34; /&gt;
+  
+  &lt;application
+    //...
+  	android:usesCleartextTraffic=&#34;true&#34;
+    //...
+  &gt;
+	&lt;!-- ... --&gt;
+  &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre>
+<p>De retour dans notre fragment 1, on va maintenant faire plus que logger les identifiants !</p>
+<p>On doit d&#39;abord instancier un Mapper. Comme son nom l&#39;indique, il sert à transformer (ou &#34;mapper&#34;) les objets JAVA en objet JSON et inversement.</p>
+<pre><code language="language-java" class="language-java">Gson gson = new GsonBuilder()
+  .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer&lt;LocalDateTime&gt;) (json, typeOfT, context) -&gt; LocalDateTime.parse(json.getAsString()))
+  .setLenient()
+  .create();
+</code></pre>
+<aside class="special"><p><strong>Astuce</strong>: On peut attacher des comportements particuliers à notre mapper, ici on assigne un parser spécial pour être sûr de bien interpreter la réponse serveur.</p>
+</aside>
+<p>Ensuite on déclare notre fameux objet Retrofit. On y attache notre mapper pour être sûr de traiter les champs de la bonne manière.</p>
+<pre><code language="language-java" class="language-java">Retrofit retrofit = new Retrofit.Builder()
+  .baseUrl(&#34;http://dourlens-monchy.fr:8090/&#34;)
+  .addConverterFactory(GsonConverterFactory.create(gson))
+  .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+  .build();
+</code></pre>
+<p>Nous sommes heureux de pouvoir utiliser ce merveilleux objet qui va nous permettre de discuter avec notre serveur. Il nous faut maintenant instancier la classe recensant les méthodes que nous avons décrites précédemment:</p>
+<pre><code language="language-java" class="language-java">AuthAPI authAPI = retrofit.create(AuthAPI.class);
+Map&lt;String, Object&gt; params = new HashMap&lt;&gt;();
+params.put(&#34;username&#34;, usernameEditText.getText().toString());
+params.put(&#34;password&#34;, passwordEditText.getText().toString());
+Call&lt;SessionToken&gt; apiCall = authAPI.loginUser(JsonUtils.mapToJSON(params));
+</code></pre>
+<p>Nous sommes désormais en possession d&#39;un objet qui contient notre requête, elle n&#39;est cependant toujours pas lancée. Pour cela, il faut lancer la fonction <code>enqueue</code>.</p>
+<pre><code language="language-java" class="language-java">apiCall.enqueue(new Callback&lt;SessionToken&gt;() {
+  @Override
+  public void onResponse(Call&lt;SessionToken&gt; call, Response&lt;SessionToken&gt; response) {
+    assert response.body() != null;
+    SessionToken sessionToken = new SessionToken(response.body());
+    Log.i(&#34;Session Token&#34;,sessionToken.toString());
+  }
+
+  @Override
+  public void onFailure(Call&lt;SessionToken&gt; call, Throwable t) {
+    Log.i(&#34;ERROR&#34;,t.getMessage());
+  }
+});
+</code></pre>
+<p>Cette fonction nous permet d&#39;interprêter la réponse serveur, peut importe sa nature. Dans un cas de succès, la fonction <code>onResponse</code> sera exécutée, dans la cas contraire <code>onFailure</code>.</p>
+<p>La magie apparait lorsque l&#39;on lance l&#39;application et que l&#39;on voit notre token apparaitre !</p>
+<p class="image-container"><img style="width: 600.00px" src="img/f116ce53d27bb017.png"></p>
+<aside class="warning"><p><strong>Roue de secours</strong>: Si vous n&#39;avez pas réussi cette partie, placez vous sur le tag &#34;<strong>APICall</strong>&#34;. <code>git checkout tags/APICall</code></p>
 </aside>
 
 

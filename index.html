@@ -27,7 +27,15 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="Installation Android Studio" duration="15">
+      <google-codelab-step label="Introduction" duration="5">
+        <p>Bienvenue dans ce petit tutoriel sur les applications natives JAVA. J&#39;ai essayé d&#39;être le plus exhaustif possible. Vous allez créer aujourd&#39;hui une superbe application android qui représente un système de connexion. Nous aborderons différents points tout au long de cette merveilleuse expérience. Pour vous donner un peu envie d&#39;aller jusqu&#39;au bout, voici à quoi ressemblera l&#39;application terminée:</p>
+<p class="image-container"><img style="width: 250.00px" src="img/a2f3877254bac6fe.gif"></p>
+<p>Par soucis de bienveillance de ma part, vous avez accès à un repository que voici : <a href="https://github.com/Alexandrebzk/Tutoriel-JAVA" target="_blank">Tutoriel JAVA</a>. Il vous sera proposé, tout au long du tutoriel, de repartir d&#39;une base pour démarrer l&#39;étape suivante. Ces étapes seront identifiées par des TAGS.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Installation Android Studio" duration="30">
         <p>Vous pouvez télécharger Android Studio 4.2.1 depuis <a href="https://developer.android.com/studio/" target="_blank">cette page</a>.</p>
 <p>Si vous ne disposez d&#39;aucun JDK, ce n&#39;est pas grave, tout vient avec le téléchargement d&#39;Android Studio.</p>
 <p>Voici les quelques étapes que vous serez menés à réaliser:</p>
@@ -45,8 +53,6 @@
     
       <google-codelab-step label="Création du projet" duration="20">
         <p>Dans cette étape, vous allez créer un nouveau projet Android pour votre première application. Cette application simple affiche la chaîne &#34;Hello World&#34; sur l&#39;écran d&#39;un appareil virtuel ou physique Android. Pour éviter des potentiels problèmes, nous utiliserons dans ce tutoriel l&#39;appareil émulé par Android Studio.</p>
-<p>Voici à quoi ressemblera l&#39;application terminée:</p>
-<p class="image-container"><img style="width: 250.00px" src="img/a2f3877254bac6fe.gif"></p>
 <h2 is-upgraded><strong>Ce que vous apprendrez</strong></h2>
 <ul>
 <li>Comment créer un projet dans Android Studio.</li>
@@ -146,11 +152,43 @@
       </google-codelab-step>
     
       <google-codelab-step label="Ajout des vues et des contraintes" duration="30">
-        <h2 is-upgraded><strong>Ce que vous apprendrez</strong></h2>
+        <p>Voici l&#39;objectif de cette partie :</p>
+<p class="image-container"><img style="width: 250.00px" src="img/daf9b90a91ec4066.png"></p>
+<h2 is-upgraded><strong>Ce que vous apprendrez</strong></h2>
 <ul>
 <li>Comment ajouter de nouvelles vues à votre mise en page.</li>
 <li>Comment contraindre la position d&#39;une vue à une autre vue.</li>
 </ul>
+<h2 is-upgraded><strong>Ajouter de nouvelles vues à notre page</strong></h2>
+<p>Nous allons dans cette partie mettre en place les champs nécessaires à la connexion utilisateur. Énumérons tout d&#39;abord les champs que nous allons devoir ajouter:</p>
+<ul>
+<li>Un champ texte pour le nom utilisateur/email</li>
+<li>Un champ password pour le mot de passe</li>
+<li>Changer le bouton Next en bouton Sign In (normalement ça vous savez déjà faire !)</li>
+<li>Un lien vers un autre composant pour l&#39;inscription et un autre pour la récupération de mot de passe.</li>
+<li>Un magnifique logo pour rendre tout ça un peu plus agréable</li>
+</ul>
+<p>Pour bien comprendre l&#39;architecture à laquelle nous avons à faire, voici un petit schéma:</p>
+<p class="image-container"><img style="width: 250.00px" src="img/293d8e3df004af6e.png"></p>
+<p><strong>Activity_main</strong> : Représente l&#39;application, contient la toolbar (la bande bleue) et le contenu de l&#39;application</p>
+<p><strong>Content_main</strong> : Contenu le l&#39;application, contient des fragments</p>
+<p><strong>First/Second_fragment</strong> : Ce sont les vues que nous allons utiliser. Ces fragments peuvent s&#39;apparenter à des widgets.</p>
+<p>On peut également imaginer cette architecture assez facilement dans la partie arborescence des composants :</p>
+<p>​			<code>activity_main.xml</code> ==&gt; <code>content_main.xml</code></p>
+<p><img style="width: 250.00px" src="img/d22ef5e0c6e312f2.png">=== <img style="width: 250.00px" src="img/eff9ce7899da8567.png"></p>
+<p>On voit lorsque l&#39;on double clic sur l&#39;include dans <code>activity_main.xml</code> qu&#39;on arrive dans <code>content_main.xml</code> qui lui contient un composant appelé <code>nav_host_fragment</code>, qui lui même héberge les fragments.</p>
+<aside class="warning"><p><strong>Question</strong>: Quel vue va-t-on modifier pour y ajouter les champs que l&#39;on a précédemment identifiés ?</p>
+</aside>
+<p>Ça ne marche pas vraiment si la réponse est écrite juste en dessous... Mais j&#39;ose espérer que vous avez essayé de répondre sans regarder :smile:. On doit donc modifier le fichier <code>fragment_first.xml</code> et y ajouter les champs que l&#39;on a identifié !</p>
+<p>Maintenant c&#39;est à vous de jouer ! Je vous laisse trifouiller cette merveilleuse palette de composants pour coller au maximum à l&#39;objectif !</p>
+<aside class="special"><p><strong>Aide</strong>: Si vous n&#39;arrivez pas à trouver les types de composant à utiliser, voici les réponses :  </p>
+<ul>
+<li>Username -&gt; Text &gt; Email</li>
+<li>Mot de passe -&gt; Text &gt; Password</li>
+<li>Logo -&gt; Widgets &gt; ImageView</li>
+<li>Liens -&gt; Text &gt; TextView </li>
+</ul>
+</aside>
 
 
       </google-codelab-step>

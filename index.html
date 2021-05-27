@@ -265,6 +265,16 @@
 <li>Un token, qui nous servira par la suite de passe-droit lors d&#39;appels API sécurisés</li>
 <li>Une date d&#39;expiration, car s&#39;il n&#39;y en avait pas... Ce serait la débandade !</li>
 </ul>
+<p>Il faut désormais importer cette fameuse librairie Retrofit2. Pour cela, on va l&#39;ajouter à notre gestionnaire de dépendences <strong>Gradle</strong> :</p>
+<p><code>app/build.gradle</code></p>
+<pre><code language="language-json" class="language-json">dependencies {
+  //...
+    implementation &#39;com.squareup.retrofit2:retrofit:2.4.0&#39;
+    implementation &#39;com.squareup.retrofit2:converter-gson:2.4.0&#39;
+    implementation &#39;com.squareup.retrofit2:adapter-rxjava:2.4.0&#39;
+  //...
+}
+</code></pre>
 <p>Maintenant que nous avons la réponse API sous forme d&#39;entité, nous allons maintenant définir l&#39;appel que nous voulons faire :</p>
 <pre><code language="language-java" class="language-java">public interface AuthAPI {
 
@@ -308,16 +318,6 @@
 	&lt;!-- ... --&gt;
   &lt;/application&gt;
 &lt;/manifest&gt;
-</code></pre>
-<p>Maintenant que notre application a accès à internet, il nous faut importer cette fameuse librairie Retrofit2. Pour cela, on va l&#39;ajouter à notre gestionnaire de dépendences <strong>Gradle</strong> :</p>
-<p><code>app/build.gradle</code></p>
-<pre><code language="language-json" class="language-json">dependencies {
-  //...
-    implementation &#39;com.squareup.retrofit2:retrofit:2.4.0&#39;
-    implementation &#39;com.squareup.retrofit2:converter-gson:2.4.0&#39;
-    implementation &#39;com.squareup.retrofit2:adapter-rxjava:2.4.0&#39;
-  //...
-}
 </code></pre>
 <p>De retour dans notre fragment 1, on va maintenant faire plus que logger les identifiants !</p>
 <p>On doit d&#39;abord instancier un Mapper. Comme son nom l&#39;indique, il sert à transformer (ou &#34;mapper&#34;) les objets JAVA en objet JSON et inversement.</p>

@@ -309,6 +309,16 @@
   &lt;/application&gt;
 &lt;/manifest&gt;
 </code></pre>
+<p>Maintenant que notre application a accès à internet, il nous faut importer cette fameuse librairie Retrofit2. Pour cela, on va l&#39;ajouter à notre gestionnaire de dépendences <strong>Gradle</strong> :</p>
+<p><code>app/build.gradle</code></p>
+<pre><code language="language-json" class="language-json">dependencies {
+  //...
+    implementation &#39;com.squareup.retrofit2:retrofit:2.4.0&#39;
+    implementation &#39;com.squareup.retrofit2:converter-gson:2.4.0&#39;
+    implementation &#39;com.squareup.retrofit2:adapter-rxjava:2.4.0&#39;
+  //...
+}
+</code></pre>
 <p>De retour dans notre fragment 1, on va maintenant faire plus que logger les identifiants !</p>
 <p>On doit d&#39;abord instancier un Mapper. Comme son nom l&#39;indique, il sert à transformer (ou &#34;mapper&#34;) les objets JAVA en objet JSON et inversement.</p>
 <pre><code language="language-java" class="language-java">Gson gson = new GsonBuilder()
@@ -331,6 +341,33 @@ Map&lt;String, Object&gt; params = new HashMap&lt;&gt;();
 params.put(&#34;username&#34;, usernameEditText.getText().toString());
 params.put(&#34;password&#34;, passwordEditText.getText().toString());
 Call&lt;SessionToken&gt; apiCall = authAPI.loginUser(JsonUtils.mapToJSON(params));
+</code></pre>
+<p>Par soucis de généralisation je vous propose cette classe <code>JsonUtils</code> qui vous permet de transformer un type <code>Map&lt;String,Object&gt;</code> en objet JSON. Cela permet dans le cas présent de créer le body de notre requête de login.</p>
+<pre><code language="language-java" class="language-java">public class JsonUtils {
+
+  public static JsonObject mapToJSON(Map&lt;String, Object&gt; params) {
+
+    JsonObject gsonObject = new JsonObject();
+    try {
+      JSONObject jsonObj_ = new JSONObject();
+      for (Map.Entry&lt;String, Object&gt; entry : params.entrySet()) {
+        jsonObj_.put(entry.getKey(), entry.getValue());
+      }
+      JsonParser jsonParser = new JsonParser();
+      gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+      //print parameter
+      Log.d(&#34;MY gson.JSON:  &#34;, &#34;AS PARAMETER  &#34; + gsonObject);
+
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+
+    return gsonObject;
+  }
+
+
+}
 </code></pre>
 <p>Nous sommes désormais en possession d&#39;un objet qui contient notre requête, elle n&#39;est cependant toujours pas lancée. Pour cela, il faut lancer la fonction <code>enqueue</code>.</p>
 <pre><code language="language-java" class="language-java">apiCall.enqueue(new Callback&lt;SessionToken&gt;() {
